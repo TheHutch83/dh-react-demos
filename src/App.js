@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-
 class App extends Component {
-  state = { todos: ["Clean Car", "Buy bread", "Feed fish"] };
+  state = { todos: ["Clean car", "Buy bread", "Feed fish"] };
 
   onTodoInput = (e) => {
     this.setState({ todoInput: e.target.value });
@@ -10,6 +9,7 @@ class App extends Component {
   onAddClick = () => {
     const todos = [...this.state.todos];
     todos.push(this.state.todoInput);
+
     this.setState({ todos });
   };
 
