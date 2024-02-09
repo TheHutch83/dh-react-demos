@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Interface from "./components/Interface";
+
 class App extends Component {
   state = {
     todos: [
@@ -15,6 +16,13 @@ class App extends Component {
   };
 
   onAddClick = () => {
+    const isDuplicate = this.state.todos.some((todo) => {
+      return todo.title === this.state.todoInput;
+    });
+    if (isDuplicate) {
+      return;
+    }
+
     const todos = [...this.state.todos];
     todos.push({ title: this.state.todoInput, todo: false });
     this.setState({ todos });
