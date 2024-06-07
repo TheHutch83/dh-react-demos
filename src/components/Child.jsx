@@ -7,11 +7,18 @@ class Child extends Component {
     console.log("contructor ran, the component is born");
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     console.log("HTML is now inside the DOM");
+
+    const { data } = await axios.get(
+      `https://thesimpsonsquoteapi.glitch.me/quotes
+      `
+    );
+
+    console.log(data);
   }
   render() {
-    return <p>Iam CHILD</p>;
+    return <p>Loading...</p>;
   }
 }
 
