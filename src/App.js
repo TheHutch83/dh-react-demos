@@ -1,20 +1,26 @@
 import React, { Component } from "react";
-import Child from "./components/Child";
+import Spinny from "./components/Spinny";
+import "./App.css";
+import axios from "axios";
+import Interface from "./components/Interface";
 
 class App extends Component {
-  state = { show: true };
+  state = {};
+
+  async componentDidMount() {
+    const { data } = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?q=Newcastle&appid=3da8a0c7ed934203261619eac46bb437`
+    );
+    this.setState({ weather: data });
+  }
+
   render() {
-    return (
-      <>
-        <button
-          onClick={() => {
-            this.setState({ show: !this.state.show });
-          }}
-        >
-          Toggle
-        </button>
-        {this.state.show && <Child />}
-      </>
+    console.log(this.state);
+
+    return this.state.weather ? (
+      <Interface weather={this.state.weather} />
+    ) : (
+      <Spinny />
     );
   }
 }
