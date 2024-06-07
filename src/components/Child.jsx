@@ -24,7 +24,7 @@ class Child extends Component {
     console.log("render ran, HTML getting create", this.state);
 
     if (this.state.simpsons) {
-      return <p>We have data</p>;
+      return <p>We have data new</p>;
     }
 
     return <p>Loading...</p>;
