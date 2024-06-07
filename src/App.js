@@ -14,6 +14,10 @@ class App extends Component {
     this.setState({ weather: data });
   }
 
+  componentDidUpdate() {
+    console.log("comp did update ran");
+  }
+
   render() {
     console.log(this.state);
 
