@@ -7,6 +7,8 @@ class Child extends Component {
     console.log("contructor ran, the component is born");
   }
 
+  state = {};
+
   async componentDidMount() {
     console.log("HTML is now inside the DOM");
 
@@ -15,9 +17,16 @@ class Child extends Component {
       `
     );
 
-    console.log(data);
+    this.setState({ simpsons: data });
   }
+
   render() {
+    console.log("render ran, HTML getting create", this.state);
+
+    if (this.state.simpsons) {
+      return <p>We have data</p>;
+    }
+
     return <p>Loading...</p>;
   }
 }
