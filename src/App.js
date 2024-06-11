@@ -1,21 +1,12 @@
 import React, { Component } from "react";
-import Child from "./components/Child";
 
 class App extends Component {
-  state = { show: true };
+  state = { todos: [" Clean car", "Buy milk"] };
+
   render() {
-    return (
-      <>
-        <button
-          onClick={() => {
-            this.setState({ show: !this.state.show });
-          }}
-        >
-          Toggle
-        </button>
-        {this.state.show && <Child />}
-      </>
-    );
+    return this.state.todos.map((todo) => {
+      return <p>{todo}</p>;
+    });
   }
 }
 
