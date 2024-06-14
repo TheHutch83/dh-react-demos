@@ -10,10 +10,10 @@ class App extends Component {
 
   getAPIData = async () => {
     const { data } = await axios.get(
-      `https://thesimpsonsquoteapi.glitch.me/quotes?count=num`
+      `https://api.spacexdata.com/v5/launches/latest`
     );
 
-    this.setState({ simpsons: data });
+    this.setState({ spaceX: data });
   };
 
   render() {
