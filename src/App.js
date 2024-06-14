@@ -1,42 +1,24 @@
 import React, { Component } from "react";
-import Todo from "./components/Todo";
+import axios from "axios";
 
 class App extends Component {
-  state = {
-    todos: [
-      { title: "Clean car", done: false },
-      { title: "Buy milk", done: true },
-      { title: "Buy Cheese", done: false },
-    ],
-  };
+  state = {};
 
-  onToggleDone = (item) => {
-    const index = this.state.todos.findIndex((todo) => todo.title === item);
-    const todos = [...this.state.todos];
-    todos[index].done = !todos[index].done;
-    this.setState({ todos });
+  componentDidMount() {
+    this.getAPIData();
+  }
+
+  getAPIData = async () => {
+    const { data } = await axios.get(
+      `https://thesimpsonsquoteapi.glitch.me/quotes?count=num`
+    );
+
+    this.setState({ simpsons: data });
   };
 
   render() {
-    let count = 0;
-    this.state.todos.forEach((todo) => {
-      if (todo.done) count++;
-    });
-    return (
-      <>
-        <p>Total tasks done:{count}</p>
-        {this.state.todos.map((todo) => {
-          return (
-            <Todo
-              todo={todo.title}
-              done={todo.done}
-              onToggleDone={this.onToggleDone}
-            />
-          );
-        })}
-        ;
-      </>
-    );
+    console.log(this.state);
+    return <></>;
   }
 }
 
