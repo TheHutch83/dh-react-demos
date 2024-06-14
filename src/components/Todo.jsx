@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 
 class Todo extends Component {
-  render() {
-    const { todo, onTodoToggleClick, onDeleteClick } = this.props;
+  state = { done: false };
 
+  render() {
     return (
-      <div className={todo.done ? "done" : "undone"}>
-        <p onClick={() => onTodoToggleClick(todo.title)}>{todo.title}</p>
-        <button onClick={() => onDeleteClick(todo.title)}>X</button>
-      </div>
+      <>
+        <p>{this.props.todo}</p>;
+        <button
+          onClick={() => {
+            this.setState({ done: !this.state.done });
+          }}
+        >
+          Done
+        </button>
+      </>
     );
   }
 }
