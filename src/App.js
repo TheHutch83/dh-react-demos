@@ -1,16 +1,12 @@
 import React, { Component } from "react";
+import Bob from "./components/Bob";
+import Alice from "./components/Alice";
 
 class App extends Component {
-  state = { todos: [" Clean car", "Buy milk"] };
-
+  state = { name: "David", age: 41, happy: true };
   render() {
-    const { todos } = this.state;
-    if (!todos.length) {
-      return <p>No todos</p>;
-    }
-    return this.state.todos.map((todo) => {
-      return <p>{todo}</p>;
-    });
+    //return <Alice name={this.state.nme} />;// long way
+    return <Alice {...this.state} />;
   }
 }
 
