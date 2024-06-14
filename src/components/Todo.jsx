@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 
 class Todo extends Component {
-  state = { done: false };
-
   render() {
     return (
       <>
-        <p>{this.props.todo}</p>;
+        <p style={{ backgroundColor: this.props.done ? "red" : "blue" }}>
+          {this.props.todo}
+        </p>
         <button
           onClick={() => {
-            this.setState({ done: !this.state.done });
+            this.props.onToggleDone(this.props.todo);
           }}
         >
           Done
