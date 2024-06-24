@@ -1,3 +1,4 @@
+import { getAllByTitle } from "@testing-library/react";
 import React, { Component } from "react";
 
 class AlbumItem extends Component {
@@ -8,7 +9,7 @@ class AlbumItem extends Component {
       <div key={id}>
         <h1>{title}</h1>
         <a href={url}>
-          <img src={thumbnailUrl} />
+          <img src={thumbnailUrl} alt={title} />
         </a>
         <button onClick={() => onDeleteItem(index)}>Delete</button>
       </div>

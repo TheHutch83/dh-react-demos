@@ -14,8 +14,9 @@ class App extends Component {
     this.setState({ album: data });
   }
 
-  onDeleteItem = (index) => {
+  onDeleteItem = (id) => {
     const album = [...this.state.album];
+    const index = album.findIndex((item) => item.id === id);
     album.splice(index, 1);
     this.setState({ album });
   };
