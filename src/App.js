@@ -13,6 +13,13 @@ class App extends Component {
     data.length = 50;
     this.setState({ album: data });
   }
+
+  onDeleteItem = (index) => {
+    const album = [...this.state.album];
+    album.splice(index, 1);
+    this.setState({ album });
+  };
+
   render() {
     console.log(this.state);
 
@@ -20,7 +27,7 @@ class App extends Component {
       return <p>Loading....</p>;
     }
 
-    return <Album album={this.state.album} />; //conditional rendering needed
+    return <Album album={this.state.album} onDeleteItem={this.onDeleteItem} />; //conditional rendering needed
   }
 }
 
