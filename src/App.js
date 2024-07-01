@@ -1,16 +1,18 @@
 import React, { Component } from "react";
+import axios from "axios";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Main from "./components/Main";
 
 class App extends Component {
-  state = { todos: [" Clean car", "Buy milk"] };
-
   render() {
-    const { todos } = this.state;
-    if (!todos.length) {
-      return <p>No todos</p>;
-    }
-    return this.state.todos.map((todo) => {
-      return <p>{todo}</p>;
-    });
+    return (
+      <div>
+        <Header />
+        <aside></aside>
+        <Main />
+      </div>
+    );
   }
 }
 
