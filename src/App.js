@@ -1,24 +1,21 @@
 import React from "react";
 
-import { useState } from "react";
-
 const App = () => {
-  const [count, setCount] = useState(0);
+  const { href } = window.location;
 
-  const add = () => {
-    setCount(count + 1);
-  };
+  if (href.includes("about")) {
+    return <h1>About page</h1>;
+  }
 
-  const minus = () => {
-    setCount(count - 1);
-  };
+  if (href.includes("contact")) {
+    return <h1>Contact </h1>;
+  }
 
   return (
     <>
-      <button onClick={add}>+</button>
-      <button onClick={minus}>-</button>
-      <p>Count: {count}</p>
-      {/* this count here, refers to count above */}
+      <p>Other page!</p>
+      <a href="about">About</a>
+      <a href="contact">Contact</a>
     </>
   );
 };
