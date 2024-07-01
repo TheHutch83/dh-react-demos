@@ -1,18 +1,16 @@
-import axios from "axios";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Main from "./components/Main";
-
 import React from "react";
 
+import { useState } from "react";
+
 const App = () => {
+  const [count, setCount] = useState(0);
+
   return (
-    <div>
-      <Header />
-      <aside></aside>
-      <Main />
-      <Footer />
-    </div>
+    <>
+      <button>+</button>
+      <button>-</button>
+      <p>Count: {}</p>
+    </>
   );
 };
 
