@@ -1,22 +1,16 @@
 import React from "react";
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
-  const { href } = window.location;
-
-  if (href.includes("about")) {
-    return <h1>About page</h1>;
-  }
-
-  if (href.includes("contact")) {
-    return <h1>Contact </h1>;
-  }
-
   return (
-    <>
-      <p>Other page!</p>
-      <a href="about">About</a>
-      <a href="contact">Contact</a>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="about" element={<About />} />
+      <Route path="contact" element={<Contact />} />
+    </Routes>
   );
 };
 
