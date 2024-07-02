@@ -1,25 +1,14 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React from "react";
+import simpsons from "./backup.json";
+import Character from "./component/Character";
+import { Route, Routes } from "react-router";
 
-class App extends Component {
-  state = {};
-
-  componentDidMount() {
-    this.getAPIData();
-  }
-
-  getAPIData = async () => {
-    const { data } = await axios.get(
-      `https://thesimpsonsquoteapi.glitch.me/quotes?count=num`
-    );
-
-    this.setState({ simpsons: data });
-  };
-
-  render() {
-    console.log(this.state);
-    return <></>;
-  }
-}
+const App = () => {
+  return (
+    <Routes>
+      <Route path="/:name" element={<Character />} />
+    </Routes>
+  );
+};
 
 export default App;
