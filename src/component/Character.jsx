@@ -9,9 +9,14 @@ const Character = () => {
     return character.character === name;
   });
 
-  console.log(character);
+  // console.log(character);
 
-  return <></>;
+  return (
+    <>
+      <p>{character.character}</p>
+      <p>{character.quote}</p>
+    </>
+  );
 };
 
 export default Character;
