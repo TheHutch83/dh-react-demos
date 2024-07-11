@@ -54,7 +54,7 @@ const App = () => {
           error={errors.password}
         /> */}
 
-        <Input
+        {/* <Input
           name="currency"
           onUserInput={onUserInput}
           error={errors.currency}
@@ -67,7 +67,8 @@ const App = () => {
           error={errors.age}
           type="select"
           options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        />
+        /> */}
+        {/* only commented out because there is no schema to validate the code which will throw up an error */}
       </form>
     </div>
   );
