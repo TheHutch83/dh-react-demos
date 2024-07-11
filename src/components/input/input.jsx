@@ -5,7 +5,7 @@ const Input = (props) => {
 
   const { name, type, onUserInput, error, options } = props;
 
-  if (type === "select") {
+  if (options) {
     return (
       <>
         <label for={name}>{name}</label>
