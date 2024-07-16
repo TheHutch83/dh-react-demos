@@ -1,8 +1,11 @@
 import React from "react";
-import Child from "./components/Child";
 
 const App = () => {
-  return <Child name="David" />;
+  const onClick = () => {
+    console.log("Click");
+  };
+
+  return <button onClick={onClick}>Click me</button>;
 };
 
 export default App;
