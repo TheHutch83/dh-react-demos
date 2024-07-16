@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 const App = () => {
-  const onClick = () => {
-    console.log("Click");
-  };
+  const [state, setState] = useState({ count: 0 });
 
-  return <button onClick={onClick}>Click me</button>;
+  return (
+    <>
+      <p>{state.count}</p>
+      <button
+        onClick={() => {
+          setState({ count: state.count + 1 });
+        }}
+      >
+        Add
+      </button>
+    </>
+  );
 };
 
 export default App;
