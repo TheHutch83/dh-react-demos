@@ -3,6 +3,7 @@ import axios from "axios";
 
 const App = () => {
   const [simpsons, setSimpsons] = useState();
+  const [getNew, setGetNew] = useState(0);
 
   const getApiData = async () => {
     const { data } = await axios.get(
@@ -19,13 +20,22 @@ const App = () => {
     () => {
       getApiData();
     },
-    [] //means return once
+    [getNew] //means return once
   );
   return (
-    simpsons &&
-    simpsons.map((char) => {
-      return <p>{char.quote}</p>;
-    })
+    <>
+      <button
+        onClick={() => {
+          setGetNew(getNew + 1);
+        }}
+      >
+        Update count
+      </button>
+      {simpsons &&
+        simpsons.map((char) => {
+          return <p>{char.quote}</p>;
+        })}
+    </>
   );
 };
 
