@@ -1,39 +1,38 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Todo from "./components/Todo";
+import Controls from "./components/Controls";
 
 const App = () => {
-  const [simpsons, setSimpsons] = useState();
-  const [getNew, setGetNew] = useState(0);
+  const [todos, setTodos] = useState();
+  const [search, setSearch] = useState();
 
-  const getApiData = async () => {
+  const getTodos = async () => {
     const { data } = await axios.get(
-      `https://thesimpsonsquoteapi.glitch.me/quotes?count=50`
+      `https://jsonplaceholder.typicode.com/todos`
     );
-    setSimpsons(data);
 
-    // setTimeout(() => {
-    //   getApiData();
-    // }, 5000);
+    setTodos(data);
   };
 
-  useEffect(
-    () => {
-      getApiData();
-    },
-    [getNew] //means return once
-  );
+  useEffect(() => {
+    getTodos();
+  }, []);
+  console.log(todos, search);
+
+  useEffect(() => {
+    getTodos();
+  }, [search]);
+
+  const onInput = (e) => {
+    setSearch(e.target.value);
+  };
   return (
     <>
-      <button
-        onClick={() => {
-          setGetNew(getNew + 1);
-        }}
-      >
-        Update count
-      </button>
-      {simpsons &&
-        simpsons.map((char) => {
-          return <p>{char.quote}</p>;
+      <Controls onInput={onInput} />
+      {todos &&
+        todos.map((todo) => {
+          return <Todo {...todo} />;
         })}
     </>
   );
