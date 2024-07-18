@@ -5,7 +5,8 @@ import Controls from "./components/Controls";
 
 const App = () => {
   const [todos, setTodos] = useState();
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
+  const [newTodo, setNewTodo] = useState("");
 
   const getTodos = async () => {
     const { data } = await axios.get(
@@ -18,22 +19,51 @@ const App = () => {
   useEffect(() => {
     getTodos();
   }, []);
-  console.log(todos, search);
 
-  useEffect(() => {
-    getTodos();
-  }, [search]);
+  // useEffect(() => {
+  //   getTodos();
+  // }, [search]);
 
-  const onInput = (e) => {
+  const onSearchInput = (e) => {
     setSearch(e.target.value);
   };
+
+  const onNewInput = (e) => {
+    setNewTodo(e.target.value);
+  };
+
+  const onNewBtn = () => {
+    const copy = [...todos];
+    copy.push({
+      userId: 1,
+      id: Math.random(),
+      title: newTodo,
+      completed: false,
+    });
+    setTodos(copy);
+    console.log("Btn");
+  };
+
+  if (!todos) {
+    return <p>Loading...</p>;
+  }
+
+  const filtered = todos.filter((todo) => {
+    return todo.title.toLowerCase().includes(search.toLocaleLowerCase());
+  });
+
+  console.log(todos, search, newTodo);
+
   return (
     <>
-      <Controls onInput={onInput} />
-      {todos &&
-        todos.map((todo) => {
-          return <Todo {...todo} />;
-        })}
+      <Controls
+        onSearchInput={onSearchInput}
+        onNewInput={onNewInput}
+        onNewBtn={onNewBtn}
+      />
+      {filtered.map((todo) => {
+        return <Todo {...todo} />;
+      })}
     </>
   );
 };
