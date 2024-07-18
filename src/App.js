@@ -1,69 +1,28 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import Todo from "./components/Todo";
-import Controls from "./components/Controls";
 
 const App = () => {
-  const [todos, setTodos] = useState();
-  const [search, setSearch] = useState("");
-  const [newTodo, setNewTodo] = useState("");
+  const [weather, setWeather] = useState();
+  const [location] = useState("London");
 
-  const getTodos = async () => {
+  const getWeather = useCallback(async () => {
     const { data } = await axios.get(
-      `https://jsonplaceholder.typicode.com/todos`
+      `https://api.openweathermap.org/data/2.5/weather?q=${location},UK&appid=3da8a0c7ed934203261619eac46bb437`
     );
-
-    setTodos(data);
-  };
+    setWeather(data);
+  }, [location]);
 
   useEffect(() => {
-    getTodos();
-  }, []);
+    getWeather();
+  }, [getWeather]);
 
-  // useEffect(() => {
-  //   getTodos();
-  // }, [search]);
+  console.log(weather);
 
-  const onSearchInput = (e) => {
-    setSearch(e.target.value);
-  };
-
-  const onNewInput = (e) => {
-    setNewTodo(e.target.value);
-  };
-
-  const onNewBtn = () => {
-    const copy = [...todos];
-    copy.push({
-      userId: 1,
-      id: Math.random(),
-      title: newTodo,
-      completed: false,
-    });
-    setTodos(copy);
-    console.log("Btn");
-  };
-
-  if (!todos) {
-    return <p>Loading...</p>;
-  }
-
-  const filtered = todos.filter((todo) => {
-    return todo.title.toLowerCase().includes(search.toLocaleLowerCase());
-  });
-
-  console.log(todos, search, newTodo);
+  if (!weather) return <p>Loading...</p>;
 
   return (
     <>
-      <Controls
-        onSearchInput={onSearchInput}
-        onNewInput={onNewInput}
-        onNewBtn={onNewBtn}
-      />
-      {filtered.map((todo) => {
-        return <Todo {...todo} />;
-      })}
+      <p>{Math.round(weather.main.temp - 273.15)}</p>
     </>
   );
 };
