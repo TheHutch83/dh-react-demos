@@ -1,13 +1,38 @@
-import React from "react";
-import simpsons from "./backup.json";
-import Character from "./component/Character";
-import { Route, Routes } from "react-router";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Simpsons from "./component/Simpsons";
 
 const App = () => {
+  const [simpsons, setSimpsons] = useState();
+  const [searchTerm, setSearchTerm] = useState("");
+  const getApiData = async () => {
+    const { data } = await axios.get(
+      `https://thesimpsonsquoteapi.glitch.me/quotes?count=50`
+    );
+    setSimpsons(data);
+  };
+
+  useEffect(() => {
+    getApiData();
+  }, []);
+
+  console.log(simpsons);
+
+  const onInput = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  if (!simpsons) return <p>Loading...</p>;
+  let filtered = [...simpsons];
+  filtered = filtered.filter((item) => {
+    return item.character.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   return (
-    <Routes>
-      <Route path="/:name" element={<Character />} />
-    </Routes>
+    <>
+      <input type="text" onInput={onInput} />
+      <Simpsons simpsons={filtered} />
+    </>
   );
 };
 
