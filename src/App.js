@@ -1,37 +1,29 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Simpsons from "./component/Simpsons";
 
 const App = () => {
-  const [simpsons, setSimpsons] = useState();
   const [searchTerm, setSearchTerm] = useState("");
-  const getApiData = async () => {
-    const { data } = await axios.get(
-      `https://thesimpsonsquoteapi.glitch.me/quotes?count=50`
-    );
-    setSimpsons(data);
-  };
-
-  useEffect(() => {
-    getApiData();
-  }, []);
-
-  console.log(simpsons);
+  const [originalCardNumber, setOriginalCardNumber] = useState("");
 
   const onInput = (e) => {
-    setSearchTerm(e.target.value);
+    setSearchTerm(
+      "*".repeat(originalCardNumber.length - 1) +
+        originalCardNumber[originalCardNumber.length - 1]
+    );
   };
 
-  if (!simpsons) return <p>Loading...</p>;
-  let filtered = [...simpsons];
-  filtered = filtered.filter((item) => {
-    return item.character.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+  const onKeyDown = (e) => {
+    setOriginalCardNumber(originalCardNumber + e.key);
+  };
 
   return (
     <>
-      <input type="text" onInput={onInput} />
-      <Simpsons simpsons={filtered} />
+      <input
+        type="text"
+        onInput={onInput}
+        onKeyDown={onKeyDown}
+        value={searchTerm}
+      />
     </>
   );
 };
